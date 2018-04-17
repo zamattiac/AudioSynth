@@ -16,12 +16,12 @@
 //#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
-//#include <tables/sin2048_int8.h> // sine table for oscillator
-#include "gen_trumpet_a.h"
+#include <tables/sin2048_int8.h> // sine table for oscillator
+//#include "gen_trumpet_a.h"
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-//Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
-Oscil <gentrumpeta_NUM_CELLS, AUDIO_RATE> aSin(gentrumpeta_DATA);
+Oscil <SIN2048_NUM_CELLS, AUDIO_RATE> aSin(SIN2048_DATA);
+//Oscil <gentrumpeta_NUM_CELLS, AUDIO_RATE> aSin(gentrumpeta_DATA);
 
 // use #define for CONTROL_RATE, not a constant
 #define CONTROL_RATE 64 // powers of 2 please
@@ -39,37 +39,30 @@ void updateControl(){
   int A2Read = mozziAnalogRead(A2);
   int A1Read = mozziAnalogRead(A1);
   int A0Read = mozziAnalogRead(A0);
-  Serial.println(A3);
-  if(A3Read > 300){  
+  Serial.println(A3); 
     if (A3Read > 700) {
       aSin.setFreq(1976);
     }
     else if (A3Read > 600) {
-      aSin.setFreq(1047);
-    }
-    else {
       aSin.setFreq(1760);
     }
-  }
-
-  else if(A2Read > 100){  
-    if (A2Read > 700) {
+    else if (A3Read > 100) {
       aSin.setFreq(1568);
     }
-    else if (A2Read > 600) {
+    else if (A2Read > 700) {
       aSin.setFreq(1397);
     }
-    else {
+    else if (A2Read > 600) {
       aSin.setFreq(1319);
     }
-  }
-  else if(A1Read > 10){  
-    if (A1Read > 700) {
+    else if (A2Read > 100) {
       aSin.setFreq(1175);
     }
-    else {
-      aSin.setFreq(1175);
+    else if (A1Read > 700) {
+      aSin.setFreq(1047);
     }
+    else if (A1Read > 600) {
+      aSin.setFreq(988);
     }
     else {
       aSin.setFreq(0);
