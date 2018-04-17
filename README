@@ -1,0 +1,31 @@
+# Things
+- mp3 files
+- wav files
+- h files with tables
+
+- oboec.mp3 is the original file
+
+# Files
+## MP3 TO EQUATION
+- mp3_to_equation.m
+- creates a sum of cosines equation
+
+## EQUATION TO WAV FILE
+- equation_to_wav.m
+- Choose Fs (sampling frequency)
+- Larger Fs is necessary to reduce aliasing (16382 is fine)
+- Fs should be 2^x 1024, 2048... etc.
+- Creates two wav files: one with 8-bit values and one with 16-bit
+- 16-bit is probably clearer but we haven't gotten it to work yet on the Arduino
+- Also contains commented-out lines to make trumpet wav files (which should work better than the oboe)
+
+## WAV to TABLE
+- char2mozzi.py
+- 2bytechar2mozzi.py
+- Usage: char2mozzi.py <infile outfile tablename samplerate>
+
+## WAV onto Arduino
+- Change the h file and names in the Oscil line that follows it
+
+## Trying out the table
+- If you can get the values from the h file into playtable.m as an array you can see what it will sound like ahead of time
