@@ -17,14 +17,16 @@
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include "pitches.h"
-//#include "cos.h"
-#include "oboec.h"
-#include "trumpeta.h"
+#include "cos.h"
+//#include "oboec.h"
+//#include "trumpeta.h"
+//#include "trumpeta16.h"
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
-//Oscil <COS_NUM_CELLS, AUDIO_RATE> aSin(COS_DATA);
+Oscil <COS_NUM_CELLS, AUDIO_RATE> aSin(COS_DATA);
 //Oscil <oboec_NUM_CELLS, AUDIO_RATE> aSin(oboec_DATA);
-Oscil <trumpeta_NUM_CELLS, AUDIO_RATE> aSin(trumpeta_DATA);
+//Oscil <trumpeta_NUM_CELLS, AUDIO_RATE> aSin(trumpeta_DATA);
+//Oscil <trumpeta16_NUM_CELLS, AUDIO_RATE> aSin(trumpeta16_DATA);
 
 // use #define for CONTROL_RATE, not a constant
 #define CONTROL_RATE 64 // powers of 2 please
@@ -80,6 +82,8 @@ int updateAudio(){
 void loop(){
   audioHook(); // required here
 }
+
+
 
 
 
