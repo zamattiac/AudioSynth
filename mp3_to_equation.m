@@ -1,6 +1,6 @@
 close all
 
-[y, Fs] = audioread('a.mp3');
+[y, Fs] = audioread('trumpeta.mp3');
 Ts = 1/Fs;
 % End time = (number of samples / samples per second) - 1
 t = [0:Ts:length(y)/Fs-Ts];
@@ -16,13 +16,13 @@ figure
 plot(freqs, Y_limited)
 title("FFT")
 
-idx = find(Y_limited > 50);
+idx = find(Y_limited > 90);
 vals = real(Y(idx));
 text(idx, vals, idx + ", " + vals)
 
 msg = "";
 for i = 1:length(idx)
-    msg = msg + "+ " + vals(i)/2000 + "*cos(2*pi*" + idx(i) + "*t)";
+    msg = msg + "+ " + vals(i)/100 + "*cos(2*pi*" + int8(idx(i)/440) + "*t)";
 end
 msg = msg + ";";
 

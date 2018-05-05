@@ -25,12 +25,11 @@ A = 0.13757*cos(2*pi*425*t)+ 0.29789*cos(2*pi*429*t)+ 0.17041*cos(2*pi*430*t)+ 0
 writefile = fopen(strcat(fname,'.txt'), 'w');
 quantizedA = int8(A*127/max(A));
 quantizedArel = int8(Arel*127/max(Arel));
-upsA = interp(double(quantizedA), 440);
+upsArel = interp(double(quantized), 440);
 % length(t)
 % length(
-plot(t, upsA(1:2048), t, quantizedArel)
-legend("A", "Arel")
-fprintf(writefile,'%d, ', quantizedArel);
+plot(t, ups(1:2048), t, quantized)
+fprintf(writefile,'%d, ', quantized);
 fclose(writefile);
 
 

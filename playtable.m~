@@ -3,7 +3,6 @@ data = [
 
 ];
 
-data = downsample(data, 440);
 sound(data, 2048)
 
 % n = [0:.1:10];

@@ -16,17 +16,24 @@
 //#include <ADC.h>  // Teensy 3.1 uncomment this line and install http://github.com/pedvide/ADC
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
+#include <EventDelay.h>
 #include "pitches.h"
 #include "cos.h"
 //#include "oboec.h"
-//#include "trumpeta.h"
+#include "trumpeta.h"
+//#include "trumpetg.h"
 //#include "trumpeta16.h"
+//#include "pianoc.h"
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <COS_NUM_CELLS, AUDIO_RATE> aSin(COS_DATA);
 //Oscil <oboec_NUM_CELLS, AUDIO_RATE> aSin(oboec_DATA);
-//Oscil <trumpeta_NUM_CELLS, AUDIO_RATE> aSin(trumpeta_DATA);
+//Oscil <trumpeta_NUM_CELLS, AUDIO_RATE> aSin (trumpeta_DATA);
 //Oscil <trumpeta16_NUM_CELLS, AUDIO_RATE> aSin(trumpeta16_DATA);
+//Oscil <pianoc_NUM_CELLS, AUDIO_RATE> aSin(pianoc_DATA);
+boolean is_pure = true;
+
+EventDelay dlay(500);
 
 // use #define for CONTROL_RATE, not a constant
 #define CONTROL_RATE 64 // powers of 2 please
@@ -38,34 +45,43 @@ void setup(){
 
 
 void updateControl(){
-  Serial.println(mozziAnalogRead(A3));
   int A3Read = mozziAnalogRead(A3);
   int A2Read = mozziAnalogRead(A2);
   int A1Read = mozziAnalogRead(A1);
   int A0Read = mozziAnalogRead(A0);
     if (A3Read > 700) {
-      aSin.setFreq(NOTE_C7);
+      aSin.setFreq(NOTE_C5);
     }
     else if (A3Read > 600) {
-      aSin.setFreq(NOTE_B6);
+      aSin.setFreq(NOTE_D5);
     }
     else if (A3Read > 100) {
-      aSin.setFreq(NOTE_A6);
+      aSin.setFreq(NOTE_E5);
     }
     else if (A2Read > 700) {
-      aSin.setFreq(NOTE_G6);
+      aSin.setFreq(NOTE_F5);
     }
     else if (A2Read > 600) {
-      aSin.setFreq(NOTE_F6);
+      aSin.setFreq(NOTE_G5);
     }
     else if (A2Read > 100) {
-      aSin.setFreq(NOTE_E6);
+      aSin.setFreq(NOTE_A5);
     }
     else if (A1Read > 700) {
-      aSin.setFreq(NOTE_D6);
-    }
-    else if (A1Read > 600) {
-      aSin.setFreq(NOTE_C6);
+//      aSin.setFreq(NOTE_B5);
+//    }
+//    else if (A1Read > 600) {
+      if (dlay.ready()) {
+        if (is_pure) {
+          aSin.setTable(trumpeta_DATA);
+          is_pure = false;
+        }
+        else {
+          aSin.setTable(COS_DATA);
+          is_pure = true;
+        }
+        dlay.start();
+      }
     }
     else {
       aSin.setFreq(0);
@@ -75,7 +91,7 @@ void updateControl(){
 
 
 int updateAudio(){
-  return aSin.next(); // return an int signal centred around 0
+    return aSin.next(); // return an int signal centred around 0
 }
 
 
