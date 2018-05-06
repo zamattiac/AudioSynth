@@ -19,18 +19,11 @@
 #include <EventDelay.h>
 #include "pitches.h"
 #include "cos.h"
-//#include "oboec.h"
 #include "trumpeta.h"
-//#include "trumpetg.h"
-//#include "trumpeta16.h"
-//#include "pianoc.h"
 
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file of table #included above
 Oscil <COS_NUM_CELLS, AUDIO_RATE> aSin(COS_DATA);
-//Oscil <oboec_NUM_CELLS, AUDIO_RATE> aSin(oboec_DATA);
-//Oscil <trumpeta_NUM_CELLS, AUDIO_RATE> aSin (trumpeta_DATA);
-//Oscil <trumpeta16_NUM_CELLS, AUDIO_RATE> aSin(trumpeta16_DATA);
-//Oscil <pianoc_NUM_CELLS, AUDIO_RATE> aSin(pianoc_DATA);
+
 boolean is_pure = true;
 
 EventDelay dlay(500);
